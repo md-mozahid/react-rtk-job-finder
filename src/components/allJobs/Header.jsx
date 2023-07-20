@@ -15,7 +15,7 @@ const Header = () => {
         <select
           id="lws-sort"
           name="sort"
-          autocomplete="sort"
+          autoComplete="sort"
           className="flex-1">
           <option>Default</option>
           <option>Salary (Low to High)</option>

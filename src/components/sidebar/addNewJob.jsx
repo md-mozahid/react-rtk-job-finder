@@ -1,12 +1,14 @@
-const addNewJob = () => {
+import { Link } from 'react-router-dom'
+
+const AddNewJob = () => {
   return (
     <li>
-      <a href="/jobs" className="main-menu" id="lws-addJob-menu">
-        <i className="fa-solid fa-file-circle-plus"></i>
-        <span>Add NewJob</span>
-      </a>
+      <Link to="add-new-job" className="main-menu" id="lws-addJob-menu">
+        <i className="fa-solid fa-file-circle-plus"></i> {''}
+        <span>Add New Job</span>
+      </Link>
     </li>
   )
 }
 
-export default addNewJob
+export default AddNewJob

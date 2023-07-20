@@ -1,7 +1,7 @@
 import React from 'react'
 import Job from './Job'
 
-const jobsList = () => {
+const JobList = () => {
   return (
     <div className="jobs-list">
       <Job />
@@ -9,4 +9,4 @@ const jobsList = () => {
   )
 }
 
-export default jobsList
+export default JobList

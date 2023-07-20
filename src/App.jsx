@@ -1,15 +1,19 @@
-// import { BrowserRouter, Routes } from 'react-router-dom'
-import AllJobs from './components/allJobs/allJobs'
-import SideBar from './components/sidebar/SideBar'
-import Layouts from './layouts/Layouts'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import AddNewJobForm from './pages/AddNewJobForm'
+import Home from './pages/Home'
 
 function App() {
   return (
+    // <Home />
     <>
-      <Layouts>
-        <SideBar />
-        <AllJobs />
-      </Layouts>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="add-new-job" element={<AddNewJobForm />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }

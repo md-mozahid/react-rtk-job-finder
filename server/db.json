@@ -1,25 +1,25 @@
 {
   "jobs": [
     {
-      "title": "MERN Stack Developer",
-      "type": "Remote",
-      "salary": "25000",
+      "title": "Full Stack Developer",
+      "type": "Internship",
+      "salary": "14000",
       "deadline": "2023-07-21",
       "id": 1
     },
     {
       "title": "Senior Executive",
       "type": "Remote",
-      "salary": 12000,
+      "salary": "11000",
       "deadline": "2023-07-22",
       "id": 2
     },
     {
-      "title": "Product Manager",
-      "type": "Internship",
-      "salary": 11000,
-      "deadline": "2023-07-22",
-      "id": 3
+      "title": "IOS App Developer",
+      "type": "Full-Time",
+      "salary": 12000,
+      "deadline": "2023-07-21",
+      "id": 4
     }
   ]
 }

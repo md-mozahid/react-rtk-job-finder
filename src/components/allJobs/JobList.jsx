@@ -4,7 +4,7 @@ import { fetchJobs } from '../../features/jobs/JobsSlice'
 import Job from './Job'
 
 const JobList = () => {
-  const { allJobs, isLoading, isError, error } = useSelector((state) => state.job)
+  const { allJobs, isLoading, isError} = useSelector((state) => state.job)
   const dispatch = useDispatch()
 
   useEffect(() => {

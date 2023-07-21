@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { editActive, removeJob } from '../../features/jobs/JobsSlice'
 import { useNavigate } from 'react-router-dom'
+import { editActive, removeJob } from '../../features/jobs/JobsSlice'
 
 const Job = ({ job }) => {
   const { id, title, type, salary, deadline } = job
@@ -23,7 +23,7 @@ const Job = ({ job }) => {
         <div className="job-footers">
           <div className="lws-type">
             {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
-            <i className="fa-solid fa-stop !text-[#FF8A00] text-lg mr-1.5"></i>
+            <i className={`fa-solid fa-stop ${type} text-lg mr-1.5`}></i>
             {type}
           </div>
           <div className="lws-salary">

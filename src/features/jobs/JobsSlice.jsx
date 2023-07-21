@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   error: '',
+  editing: {},
 }
 
 // create thunk

@@ -1,13 +1,18 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { createJob } from '../features/jobs/JobsSlice'
+import { changeJob, createJob } from '../features/jobs/JobsSlice'
 
 const AddNewJobForm = () => {
   const [title, setTitle] = useState('')
   const [type, setType] = useState('')
   const [salary, setSalary] = useState('')
   const [deadline, setDeadline] = useState('')
+
+  // for editing
+  const [editMode, setEditMode] = useState(false)
+  const { isLoading, isError } = useSelector((state) => state.job)
+  const { editing } = useSelector((state) => state.job)
 
   const navigate = useNavigate()
 
@@ -34,13 +39,54 @@ const AddNewJobForm = () => {
     navigate('/')
   }
 
+  // editing
+  useEffect(() => {
+    const { id, title, type, deadline } = editing || {}
+
+    if (id) {
+      setEditMode(true)
+      setTitle(title)
+      setType(type)
+      setSalary(salary)
+      setDeadline(deadline)
+    } else {
+      setEditMode(false)
+      reset()
+    }
+  }, [editing])
+
+  const handleUpdate = (e) => {
+    e.preventDefault()
+    dispatch(
+      changeJob({
+        id: editing?.id,
+        data: {
+          title: title,
+          type: type,
+          salary: salary,
+          deadline: deadline,
+        },
+      })
+    )
+    setEditMode(false)
+    reset()
+  }
+
+  // cancel edit mode
+  const cancelEditMode = () => {
+    reset()
+    setEditMode(false)
+  }
+
   return (
     <div className="lg:pl-[14rem] mt-[5.8125rem]">
       <main className="max-w-3xl rounded-lg mx-auto relative z-20 p-10 xl:max-w-none bg-[#1E293B]">
         <h1 className="mb-10 text-center lws-section-title">Add New Job</h1>
 
         <div className="max-w-3xl mx-auto">
-          <form className="space-y-6" onSubmit={handleCreate}>
+          <form
+            className="space-y-6"
+            onSubmit={editMode ? handleUpdate : handleCreate}>
             <div className="fieldContainer">
               <label className="text-sm font-medium text-slate-300">
                 Job Title
@@ -122,9 +168,20 @@ const AddNewJobForm = () => {
                 type="submit"
                 id="lws-submit"
                 className="cursor-pointer btn btn-primary w-fit">
-                Submit
+                {editMode ? 'Update' : 'Submit'}
               </button>
             </div>
+            {!isLoading && isError && (
+              <p className="error">There was an error occurred</p>
+            )}
+
+            {editMode && (
+              <button
+                className="cursor-pointer btn btn-primary w-fit"
+                onClick={cancelEditMode}>
+                Cancel Editing
+              </button>
+            )}
           </form>
         </div>
       </main>

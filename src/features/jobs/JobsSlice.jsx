@@ -7,6 +7,8 @@ const initialState = {
   isError: false,
   error: '',
   editing: {},
+  filterJobs: [],
+  query: '',
 }
 
 // create thunk
@@ -44,7 +46,40 @@ const jobSlice = createSlice({
     editInActive: (state) => {
       state.editing = {}
     },
+    // filter reducers
+    allAvailableJobs: (state) => {
+      state.filterJobs = state.allJobs
+    },
+    internship: (state, action) => {
+      state.filterJobs = state.allJobs?.filter(
+        (job) => job.type === action.payload
+      )
+    },
+    remote: (state, action) => {
+      state.filterJobs = state.allJobs?.filter(
+        (job) => job.type === action.payload
+      )
+    },
+    fullTime: (state, action) => {
+      state.filterJobs = state.allJobs?.filter(
+        (job) => job.type === action.payload
+      )
+    },
+
+    // search by keywords
+    searchQuery: (state, action) => {
+      state.query = action.payload
+    },
+    // sort by salary
+    sortJob: (state, action) => {
+      if (action.payload === 'low to high') {
+        state.filterJobs?.sort((a, b) => a.salary - b.salary)
+      } else if (action.payload === 'high to low') {
+        state.filterJobs?.sort((a, b) => b.salary - a.salary)
+      }
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchJobs.pending, (state) => {
@@ -117,4 +152,13 @@ const jobSlice = createSlice({
 })
 
 export default jobSlice.reducer
-export const { editActive, editInActive } = jobSlice.actions
+export const {
+  editActive,
+  editInActive,
+  allAvailableJobs,
+  internship,
+  remote,
+  fullTime,
+  sortJob,
+  searchQuery,
+} = jobSlice.actions

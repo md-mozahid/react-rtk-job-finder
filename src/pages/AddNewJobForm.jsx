@@ -129,7 +129,7 @@ const AddNewJobForm = () => {
                 <option value="" hidden>
                   Select Job Type
                 </option>
-                <option>Full-Time</option>
+                <option>Full Time</option>
                 <option>Internship</option>
                 <option>Remote</option>
               </select>

@@ -16,6 +16,24 @@ const Job = ({ job }) => {
     dispatch(removeJob(id))
   }
 
+  // color type
+  let colorType = null
+
+  if (type === 'Internship')
+    colorType = (
+      <i className={`fa-solid fa-stop !text-[#FF5757] text-lg mr-1.5`}></i>
+    )
+
+  if (type === 'Full Time')
+    colorType = (
+      <i className={`fa-solid fa-stop !text-[#FF8A00] text-lg mr-1.5`}></i>
+    )
+
+  if (type === 'Remote')
+    colorType = (
+      <i className={`fa-solid fa-stop !text-[#56E5C4] text-lg mr-1.5`}></i>
+    )
+
   return (
     <div className="lws-single-job">
       <div className="flex-1 min-w-0">
@@ -23,7 +41,7 @@ const Job = ({ job }) => {
         <div className="job-footers">
           <div className="lws-type">
             {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
-            <i className={`fa-solid fa-stop ${type} text-lg mr-1.5`}></i>
+            {colorType}
             {type}
           </div>
           <div className="lws-salary">

@@ -4,8 +4,12 @@ import { fetchJobs } from '../../features/jobs/JobsSlice'
 import Job from './Job'
 
 const JobList = () => {
-  const { allJobs, isLoading, isError} = useSelector((state) => state.job)
+  const { allJobs, isLoading, isError } = useSelector((state) => state.job)
   const dispatch = useDispatch()
+  // filtering
+  const filterJobs = useSelector((state) => state.job.filterJobs)
+  const allAvailableJobs = useSelector((state) => state.job.allJobs)
+  const query = useSelector((state) => state.job.query)
 
   useEffect(() => {
     dispatch(fetchJobs())
@@ -20,11 +24,20 @@ const JobList = () => {
     content = <p className="error">There was an error occurred</p>
 
   if (!isLoading && !isError && allJobs.length > 0) {
-    content = allJobs.map((job) => <Job key={job.id} job={job} />)
+    content = allJobs
+      .filter((job) => {
+        if (query === '') {
+          return job
+        } else if (job.title.tolowerCase().include(query.tolowerCase())) {
+          return job
+        } else {
+        }
+      })
+      .map((job) => <Job key={job.id} job={job} />)
   }
 
   if (!isLoading && !isError && allJobs.length === 0) {
-    content = <p>No jobs found</p>
+    content = <p style={{ color: 'white' }}>No jobs found</p>
   }
 
   return <div className="jobs-list">{content}</div>

@@ -1,4 +1,14 @@
+import { useDispatch } from 'react-redux'
+import { sortJob } from '../../features/jobs/JobsSlice'
+
 const Header = () => {
+  const dispatch = useDispatch()
+
+  const handleSort = (e) => {
+    const value = e.target.value
+    dispatch(sortJob(value))
+  }
+
   return (
     <div className="md:flex space-y-2 md:space-y-0 justify-between mb-10 ">
       <h1 className="lws-section-title">All Available Jobs</h1>
@@ -12,14 +22,16 @@ const Header = () => {
             id="lws-searchJob"
           />
         </div>
+
         <select
           id="lws-sort"
           name="sort"
           autoComplete="sort"
-          className="flex-1">
+          className="flex-1"
+          onChange={handleSort}>
           <option>Default</option>
-          <option>Salary (Low to High)</option>
-          <option>Salary (High to Low)</option>
+          <option value="low to high">Salary (Low to High)</option>
+          <option value="high to low">Salary (High to Low)</option>
         </select>
       </div>
     </div>

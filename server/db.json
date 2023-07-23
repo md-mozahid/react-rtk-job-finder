@@ -1,25 +1,25 @@
 {
   "jobs": [
     {
-      "title": "Full Stack Developer",
-      "type": "Internship",
-      "salary": "14000",
-      "deadline": "2023-07-21",
+      "title": "Software Engineer",
+      "type": "Full Time",
+      "salary": 20000,
+      "deadline": "2023-07-23",
       "id": 1
     },
     {
-      "title": "Senior Executive",
-      "type": "Remote",
-      "salary": "11000",
-      "deadline": "2023-07-22",
+      "title": "Full Stack Developer",
+      "type": "Internship",
+      "salary": 10000,
+      "deadline": "2023-07-12",
       "id": 2
     },
     {
-      "title": "IOS App Developer",
-      "type": "Full Time",
-      "salary": "11000",
-      "deadline": "2023-07-21",
-      "id": 4
+      "title": "DevOps Engineer",
+      "type": "Remote",
+      "salary": 15000,
+      "deadline": "2023-07-08",
+      "id": 3
     }
   ]
 }

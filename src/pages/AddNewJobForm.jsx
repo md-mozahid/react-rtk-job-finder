@@ -63,7 +63,7 @@ const AddNewJobForm = () => {
         data: {
           title: title,
           type: type,
-          salary: salary,
+          salary: Number(salary),
           deadline: deadline,
         },
       })

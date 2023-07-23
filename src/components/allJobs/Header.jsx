@@ -15,7 +15,6 @@ const Header = () => {
   const sortHandler = (e) => {
     const value = e.target.value
     dispatch(sortBySalary(value))
-    console.log(e)
   }
 
   return (

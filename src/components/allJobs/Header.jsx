@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { sortJob } from '../../features/jobs/JobsSlice'
+import { filterBySearch } from '../../features/filter/filterSlice'
 
 const Header = () => {
+  const [input, setInput] = useState('')
   const dispatch = useDispatch()
 
-  const handleSort = (e) => {
-    const value = e.target.value
-    dispatch(sortJob(value))
-  }
+  useEffect(() => {
+    dispatch(filterBySearch(input))
+  }, [dispatch, input])
 
   return (
     <div className="md:flex space-y-2 md:space-y-0 justify-between mb-10 ">
@@ -20,6 +21,8 @@ const Header = () => {
             placeholder="Search Job"
             className="search-input"
             id="lws-searchJob"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
           />
         </div>
 
@@ -28,7 +31,7 @@ const Header = () => {
           name="sort"
           autoComplete="sort"
           className="flex-1"
-          onChange={handleSort}>
+          >
           <option>Default</option>
           <option value="low to high">Salary (Low to High)</option>
           <option value="high to low">Salary (High to Low)</option>

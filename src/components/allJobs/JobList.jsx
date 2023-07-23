@@ -7,13 +7,50 @@ const JobList = () => {
   const { allJobs, isLoading, isError } = useSelector((state) => state.job)
   const dispatch = useDispatch()
   // filtering
-  const filterJobs = useSelector((state) => state.job.filterJobs)
-  const allAvailableJobs = useSelector((state) => state.job.allJobs)
-  const query = useSelector((state) => state.job.query)
+  const { search, sort, type } = useSelector((state) => state.filter)
 
+  // data fetch from server
   useEffect(() => {
     dispatch(fetchJobs())
   }, [dispatch])
+
+  // filter by search
+  const filterBySearch = (j) => {
+    if (search.trim().length > 0) {
+      return j.title.toLowerCase().includes(search)
+    } else {
+      return true
+    }
+  }
+
+  //filter by type
+  const filterByType = (j) => {
+    if (type !== 'all') {
+      return j.type === type
+    } else {
+      return true
+    }
+  }
+
+  // filter bu sort
+  const sorted = () => {
+    switch (sort) {
+      case 'salary (Low to high)':
+        return allJobs.slice().sort((a, b) => {
+          const salaryA = Number(a.salary)
+          const salaryB = Number(b.salary)
+          return salaryA - salaryB
+        })
+      case 'Salary (High to Low)':
+        return jobs.slice().sort((a, b) => {
+          const salaryA = Number(a.salary)
+          const salaryB = Number(b.salary)
+          return salaryB - salaryA
+        })
+      default:
+        return allJobs
+    }
+  }
 
   // decide what to render
   let content = null
@@ -23,21 +60,22 @@ const JobList = () => {
   if (!isLoading && isError)
     content = <p className="error">There was an error occurred</p>
 
-  if (!isLoading && !isError && allJobs.length > 0) {
-    content = allJobs
-      .filter((job) => {
-        if (query === '') {
-          return job
-        } else if (job.title.tolowerCase().include(query.tolowerCase())) {
-          return job
-        } else {
-        }
-      })
-      .map((job) => <Job key={job.id} job={job} />)
-  }
-
   if (!isLoading && !isError && allJobs.length === 0) {
     content = <p style={{ color: 'white' }}>No jobs found</p>
+  }
+
+  if (!isLoading && !isError && allJobs.length > 0) {
+    const sortedJobs = sorted()
+    const checkSearch = sortedJobs.filter(filterBySearch).length
+
+    if (checkSearch > 0) {
+      content = sortedJobs
+        .filter(filterByType)
+        .filter(filterBySearch)
+        .map((job) => <Job key={job.id} job={job} />)
+    } else {
+      content = 'No Search Result Found!'
+    }
   }
 
   return <div className="jobs-list">{content}</div>

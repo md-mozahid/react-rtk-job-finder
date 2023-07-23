@@ -16,6 +16,13 @@ const Job = ({ job }) => {
     dispatch(removeJob(id))
   }
 
+  // const color =
+  //   type === 'Remote'
+  //     ? '#56E5C4'
+  //     : type === 'Internship'
+  //     ? '#FF5757'
+  //     : '#FF8A00'
+      
   // color type
   let colorType = null
 
@@ -40,7 +47,6 @@ const Job = ({ job }) => {
         <h2 className="lws-title">{title}</h2>
         <div className="job-footers">
           <div className="lws-type">
-            {/* <!-- Fulltime - #FF8A00,  --><!-- Internship - #FF5757,  --><!-- Remote - #56E5C4,  --> */}
             {colorType}
             {type}
           </div>

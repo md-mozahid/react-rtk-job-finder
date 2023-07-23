@@ -43,7 +43,7 @@ const jobSlice = createSlice({
     },
     editInActive: (state) => {
       state.editing = {}
-    }
+    },
   },
 
   extraReducers: (builder) => {
@@ -118,13 +118,4 @@ const jobSlice = createSlice({
 })
 
 export default jobSlice.reducer
-export const {
-  editActive,
-  editInActive,
-  allAvailableJobs,
-  internship,
-  remote,
-  fullTime,
-  sortJob,
-  searchQuery,
-} = jobSlice.actions
+export const { editActive, editInActive } = jobSlice.actions

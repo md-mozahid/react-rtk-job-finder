@@ -35,14 +35,14 @@ const JobList = () => {
   // filter bu sort
   const sorted = () => {
     switch (sort) {
-      case 'salary (Low to high)':
+      case 'Salary (Low to high)':
         return allJobs.slice().sort((a, b) => {
           const salaryA = Number(a.salary)
           const salaryB = Number(b.salary)
           return salaryA - salaryB
         })
       case 'Salary (High to Low)':
-        return jobs.slice().sort((a, b) => {
+        return allJobs.slice().sort((a, b) => {
           const salaryA = Number(a.salary)
           const salaryB = Number(b.salary)
           return salaryB - salaryA
